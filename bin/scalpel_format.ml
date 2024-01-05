@@ -48,12 +48,12 @@ and serialize_value_expression_list list =
   List_ext.join "(" ")" ", " (List.map serialize_value_expression list)
 
 
-let serialize_typename (t : Scalpel_value.typename) =
-  match t with Inference -> "?" | Identifier id -> id
+let serialize_typename (t : Scalpel_modifier.typing) =
+  match t with Inference -> ":?" | Identifier id -> ":" ^ id
 
 
-let serialize_symbol (symbol : Scalpel_value.symbol) =
-  sf "%s %s:%s"
+let serialize_symbol (symbol : Scalpel_value.variable) =
+  sf "%s %s %s"
     (serialize_mutability symbol.mutability)
     symbol.name
     (serialize_typename symbol.typename)

@@ -61,7 +61,7 @@ rule token = parse
 
   | '}' {INSTRUCTIONS_CLOSER}
 
-  | ':' {TYPE_ANNOTATION_PRELUDE}
+  | ':' {TYPING_PRELUDE}
 
   | ',' {COMMA}
 

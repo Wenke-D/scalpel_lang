@@ -3,4 +3,4 @@
 
 type t0 = 1
 type t1 = x
-type t2 = Array<Int, c>
+type t2 = Array<Int, t2>

@@ -1,8 +1,7 @@
 open Scalpel_modifier
 
-type typename = Inference | Identifier of string
-
-type symbol = {mutability: mutability; name: string; typename: typename}
+type variable =
+  {mutability: mutability; name: string; typename: Scalpel_modifier.typing}
 
 type parameter = {name: string; typename: string}
 

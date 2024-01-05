@@ -10,7 +10,7 @@
 %token MUTABLE_PRELUDE
 %token FROZEN_PRELUDE
 %token STATIC_PRELUDE
-%token TYPE_ANNOTATION_PRELUDE
+%token TYPING_PRELUDE
 
 // instruction
 %token TRUE_BRANCH_PRELUDE
@@ -43,7 +43,10 @@
 %token EOF
 
 %start program
+
 %type <Scalpel_program.definition> program
+%type <Scalpel_type.expression> type_identifier
+%type <Scalpel_modifier.typing> typing
 
 %%
 
@@ -103,6 +106,12 @@ type_expression_list:
     { types }
 ;
 
+typing:
+|       { Scalpel_modifier.Inference }
+|   TYPING_PRELUDE id=IDENTIFER
+    { Scalpel_modifier.Identifier id }
+;
+
 
 instructions:
 |   INSTRUCTIONS_OPENOR
@@ -115,7 +124,7 @@ function_definition:
 |   m=mutability
     name=IDENTIFER
     parameters=parameter_list
-    TYPE_ANNOTATION_PRELUDE
+    TYPING_PRELUDE
     return=IDENTIFER
     instructions = instructions
     {
@@ -147,8 +156,8 @@ parameter_list:
 
 parameter:
     name=IDENTIFER
-    TYPE_ANNOTATION_PRELUDE
-    typename=IDENTIFER 
+    TYPING_PRELUDE
+    typename=IDENTIFER
     {
        Scalpel_value.{name; typename}
     }
@@ -187,12 +196,12 @@ construction:
 
 
 symbol:
-|   m = mutability id = IDENTIFER 
+|   m = mutability id = IDENTIFER typename=typing
     {
        Scalpel_value.{
             mutability = m;
             name = id;
-            typename = Inference
+            typename
         }
     }
 ;

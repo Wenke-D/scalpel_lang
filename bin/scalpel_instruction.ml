@@ -1,7 +1,7 @@
 type expression_chain = Scalpel_value.expression_chain
 
 type definition =
-  | Initialization of Scalpel_value.symbol * expression_chain
+  | Initialization of Scalpel_value.variable * expression_chain
   | Assignment of string * expression_chain
   | Branching of
       { predicate: expression_chain
