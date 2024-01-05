@@ -124,8 +124,7 @@ function_definition:
 |   m=mutability
     id=IDENTIFIER
     parameters=parameter_list
-    TYPING_PRELUDE
-    return=IDENTIFIER
+    return_type = typing
     instructions = instructions
     {
         Scalpel_function.{
@@ -133,7 +132,7 @@ function_definition:
             identifier = id;
             parameters;
             instructions;
-            return
+            return_type
         }
     }
 ;

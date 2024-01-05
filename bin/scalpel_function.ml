@@ -5,4 +5,4 @@ type definition =
   ; identifier: string
   ; parameters: Scalpel_value.parameters
   ; instructions: Scalpel_instruction.definitions
-  ; return: string }
+  ; return_type: typing }

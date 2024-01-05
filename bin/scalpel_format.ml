@@ -48,15 +48,15 @@ and serialize_value_expression_list list =
   List_ext.join "(" ")" ", " (List.map serialize_value_expression list)
 
 
-let serialize_typename (t : Scalpel_modifier.typing) =
-  match t with Inference -> ":?" | Identifier id -> ":" ^ id
+let serialize_typing (t : Scalpel_modifier.typing) =
+  match t with Inference -> "?" | Identifier id -> id
 
 
 let serialize_symbol (symbol : Scalpel_value.variable) =
-  sf "%s %s %s"
+  sf "%s %s :%s"
     (serialize_mutability symbol.mutability)
     symbol.name
-    (serialize_typename symbol.typename)
+    (serialize_typing symbol.typename)
 
 
 let serialize_parameter (p : Scalpel_value.parameter) =
@@ -98,7 +98,7 @@ let serialize_function (def : Scalpel_function.definition) =
     (serialize_mutability def.mutability)
     def.identifier
     (List_ext.join "(" ")" ", " (List.map serialize_parameter def.parameters))
-    def.return
+    (serialize_typing def.return_type)
     (serialize_instructions def.instructions)
 
 

@@ -1,0 +1,6 @@
+
+mutable f1(x:Int32, y:String){
+}
+
+frozen f2(a:BB, b:AA): Void{
+}
