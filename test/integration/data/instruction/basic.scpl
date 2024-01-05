@@ -1,0 +1,34 @@
+
+mutable initialization(x:Int32, y:String): Void{
+    mutable x = Int32("123")
+    mutable y = Cordinate("123", "xyz")
+    frozen x1 = String("hello")
+    static y1 = Float("48.0", f10)
+}
+
+mutable assignment(a: A, b: B): Char{
+    x = Int32("2")
+    y = x
+    z = "123"
+}
+
+mutable if_else(): Void{
+    if "123" {
+        y = x
+    }else{
+        x = y
+    }
+}
+
+mutable if_no_else(): Void{
+    if "123" {
+        y = x
+    }
+    x = y
+}
+
+static loop(): Void{
+    while "true" {
+        y = "false"
+    }
+}

@@ -1,0 +1,2 @@
+(library
+ (name scalpel_lang))

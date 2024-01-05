@@ -1,0 +1,5 @@
+
+
+frozen value_chain(a:BB, b:AA): Void{
+    x = c.t.x.y.z
+}
