@@ -3,10 +3,6 @@ open Scalpel_modifier
 type variable =
   {mutability: mutability; name: string; typename: Scalpel_modifier.typing}
 
-type parameter = {name: string; typename: string}
-
-type parameters = parameter list
-
 type construction = {onHeap: bool; typename: string; arguments: expression_list}
 
 and expression =

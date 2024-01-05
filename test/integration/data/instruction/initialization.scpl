@@ -1,0 +1,16 @@
+
+// with typing
+mutable f1(x:Int32, y:String): Void{
+    mutable x:Char = Int32("123")
+    mutable y:Star = Cordinate("123", "xyz")
+    frozen x1:Number = String("hello")
+    static y1:Double = Float("48.0", f10)
+}
+
+// omit typing
+mutable f2(x:Int32, y:String){
+    mutable x = Int32("123")
+    mutable y = Cordinate("123", "xyz")
+    frozen x1 = String("hello")
+    static y1 = Float("48.0", f10)
+}

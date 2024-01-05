@@ -1,0 +1,9 @@
+
+
+// without
+mutable f1(x, y){
+}
+
+// with
+frozen f2(a:BB, b:AA): Void{
+}

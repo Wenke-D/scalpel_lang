@@ -1,0 +1,15 @@
+
+mutable if_else(): Void{
+    if "123" {
+        y = x
+    }else{
+        x = y
+    }
+}
+
+mutable if_no_else(): Void{
+    if "123" {
+        y = x
+    }
+    x = y
+}

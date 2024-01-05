@@ -21,7 +21,7 @@
 // operators
 %token ASSIGN
 
-// symbol
+// type symbol
 %token <int>NON_NEGATIVE_INTEGER
 
 
@@ -155,10 +155,9 @@ parameter_list:
 
 parameter:
     name=IDENTIFIER
-    TYPING_PRELUDE
-    typename=IDENTIFIER
+    t = typing
     {
-       Scalpel_value.{name; typename}
+       Scalpel_function.{name; typename = t}
     }
 ;
 
@@ -194,7 +193,7 @@ construction:
 ;
 
 
-symbol:
+variable:
 |   m = mutability id = IDENTIFIER typename=typing
     {
        Scalpel_value.{
@@ -207,7 +206,7 @@ symbol:
 
 
 instruction:
-|   s = symbol
+|   s = variable
     ASSIGN
     v = value_expression_chain { Initialization(s, v) }
 

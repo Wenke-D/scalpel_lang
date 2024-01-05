@@ -52,15 +52,15 @@ let serialize_typing (t : Scalpel_modifier.typing) =
   match t with Inference -> "?" | Identifier id -> id
 
 
-let serialize_symbol (symbol : Scalpel_value.variable) =
+let serialize_variable (symbol : Scalpel_value.variable) =
   sf "%s %s :%s"
     (serialize_mutability symbol.mutability)
     symbol.name
     (serialize_typing symbol.typename)
 
 
-let serialize_parameter (p : Scalpel_value.parameter) =
-  sf "%s: %s" p.name p.typename
+let serialize_parameter (p : Scalpel_function.parameter) =
+  sf "%s: %s" p.name (serialize_typing p.typename)
 
 
 let identation = "    "
@@ -68,7 +68,7 @@ let identation = "    "
 let rec serialize_instruction (i : Scalpel_instruction.definition) =
   match i with
   | Initialization (s, v) ->
-      sf "%s%s %s %s" identation (serialize_symbol s) assign
+      sf "%s%s %s %s" identation (serialize_variable s) assign
         (serialize_value_expression_chain v)
   | Assignment (id, v) ->
       sf "%s%s %s %s" identation id assign (serialize_value_expression_chain v)

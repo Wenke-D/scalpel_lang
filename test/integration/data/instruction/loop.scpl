@@ -1,0 +1,6 @@
+
+static loop(): Void{
+    while "true" {
+        y = "false"
+    }
+}
