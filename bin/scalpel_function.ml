@@ -1,6 +1,6 @@
 open Scalpel_modifier
 
-type parameter = {name: string; typename: typing}
+type parameter = {identifier: string; typename: typing}
 
 type parameters = parameter list
 

@@ -1,7 +1,7 @@
 open Scalpel_modifier
 
 type variable =
-  {mutability: mutability; name: string; typename: Scalpel_modifier.typing}
+  {mutability: mutability; identifier: string; typename: Scalpel_modifier.typing}
 
 type construction = {onHeap: bool; typename: string; arguments: expression_list}
 

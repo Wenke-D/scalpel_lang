@@ -154,10 +154,10 @@ parameter_list:
 ;
 
 parameter:
-    name=IDENTIFIER
+    id=IDENTIFIER
     t = typing
     {
-       Scalpel_function.{name; typename = t}
+       Scalpel_function.{identifier = id; typename = t}
     }
 ;
 
@@ -198,7 +198,7 @@ variable:
     {
        Scalpel_value.{
             mutability = m;
-            name = id;
+            identifier = id;
             typename
         }
     }

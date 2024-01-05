@@ -10,8 +10,8 @@ let rec serialize_type_expression (e : Scalpel_type.expression) =
       sf "<type %s>" id
   | Symbol s ->
       sf "<symbol %d>" s
-  | Specialization (name, l) ->
-      sf "<%s -> %s%s>" name name
+  | Specialization (id, l) ->
+      sf "<%s -> %s%s>" id id
         (List_ext.join "<" ">" ", " (List.map serialize_type_expression l))
 
 
@@ -52,15 +52,15 @@ let serialize_typing (t : Scalpel_modifier.typing) =
   match t with Inference -> "?" | Identifier id -> id
 
 
-let serialize_variable (symbol : Scalpel_value.variable) =
+let serialize_variable (var : Scalpel_value.variable) =
   sf "%s %s :%s"
-    (serialize_mutability symbol.mutability)
-    symbol.name
-    (serialize_typing symbol.typename)
+    (serialize_mutability var.mutability)
+    var.identifier
+    (serialize_typing var.typename)
 
 
 let serialize_parameter (p : Scalpel_function.parameter) =
-  sf "%s: %s" p.name (serialize_typing p.typename)
+  sf "%s: %s" p.identifier (serialize_typing p.typename)
 
 
 let identation = "    "
