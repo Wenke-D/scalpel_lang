@@ -2,7 +2,7 @@
   open Scalpel_program
 %}
 
-%token <string> IDENTIFER
+%token <string> IDENTIFIER
 %token <string> LITERAL_VALUE
 
 // top-level declarations
@@ -65,7 +65,7 @@ definition:
 
 
 type_definition:
-| TYPE_PRELUDE id=IDENTIFER ASSIGN e=type_expression 
+| TYPE_PRELUDE id=IDENTIFIER ASSIGN e=type_expression 
     {
         Scalpel_type.{identifier=id; expression=e}
     }
@@ -73,7 +73,7 @@ type_definition:
 
 
 type_identifier:
-    id = IDENTIFER {Scalpel_type.Identifier id}
+    id = IDENTIFIER {Scalpel_type.Identifier id}
 ;
 
 
@@ -84,7 +84,7 @@ type_symbol:
 
 
 type_specialisation:
-    id = IDENTIFER
+    id = IDENTIFIER
     args = type_expression_list
     {
         Scalpel_type.Specialization(id, args)
@@ -108,7 +108,7 @@ type_expression_list:
 
 typing:
 |       { Scalpel_modifier.Inference }
-|   TYPING_PRELUDE id=IDENTIFER
+|   TYPING_PRELUDE id=IDENTIFIER
     { Scalpel_modifier.Identifier id }
 ;
 
@@ -122,15 +122,15 @@ instructions:
 
 function_definition:
 |   m=mutability
-    name=IDENTIFER
+    id=IDENTIFIER
     parameters=parameter_list
     TYPING_PRELUDE
-    return=IDENTIFER
+    return=IDENTIFIER
     instructions = instructions
     {
         Scalpel_function.{
             mutability = m;
-            name;
+            identifier = id;
             parameters;
             instructions;
             return
@@ -155,16 +155,16 @@ parameter_list:
 ;
 
 parameter:
-    name=IDENTIFER
+    name=IDENTIFIER
     TYPING_PRELUDE
-    typename=IDENTIFER
+    typename=IDENTIFIER
     {
        Scalpel_value.{name; typename}
     }
 ;
 
 value_expression:
-| id = IDENTIFER {Variable id}
+| id = IDENTIFIER {Variable id}
 | value = LITERAL_VALUE {Literal value}
 | c = construction {Scalpel_value.Construction c}
 ;
@@ -183,7 +183,7 @@ value_expression_list:
     { list }
 
 construction:
-    typename=IDENTIFER
+    typename=IDENTIFIER
     arguments=value_expression_list
     {
         {
@@ -196,7 +196,7 @@ construction:
 
 
 symbol:
-|   m = mutability id = IDENTIFER typename=typing
+|   m = mutability id = IDENTIFIER typename=typing
     {
        Scalpel_value.{
             mutability = m;
@@ -212,7 +212,7 @@ instruction:
     ASSIGN
     v = value_expression_chain { Initialization(s, v) }
 
-|   id = IDENTIFER
+|   id = IDENTIFIER
     ASSIGN
     v = value_expression_chain { Assignment(id, v) }
 

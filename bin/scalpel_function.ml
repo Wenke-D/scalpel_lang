@@ -2,7 +2,7 @@ open Scalpel_modifier
 
 type definition =
   { mutability: mutability
-  ; name: string
+  ; identifier: string
   ; parameters: Scalpel_value.parameters
   ; instructions: Scalpel_instruction.definitions
   ; return: string }

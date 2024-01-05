@@ -17,7 +17,7 @@
       ] ;
     fun s ->
       try  Hashtbl.find h s
-      with Not_found -> IDENTIFER(s)
+      with Not_found -> IDENTIFIER(s)
         
 }
 

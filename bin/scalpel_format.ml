@@ -96,7 +96,7 @@ and serialize_instructions l =
 let serialize_function (def : Scalpel_function.definition) =
   sf "%s %s%s -> %s %s"
     (serialize_mutability def.mutability)
-    def.name
+    def.identifier
     (List_ext.join "(" ")" ", " (List.map serialize_parameter def.parameters))
     def.return
     (serialize_instructions def.instructions)
