@@ -1,0 +1,5 @@
+profile = ocamlformat
+
+let-binding-spacing = sparse
+
+parse-docstrings = true
