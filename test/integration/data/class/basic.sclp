@@ -1,3 +1,8 @@
-class hello {
-    static int x
+class pair(
+    static int x,
+    static int y
+) {
+    mutable sum(){
+        return x.add(y)
+    }
 }

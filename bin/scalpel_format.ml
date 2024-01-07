@@ -86,6 +86,8 @@ let rec serialize_instruction (i : Scalpel_instruction.definition) =
       sf "while (%s)%s"
         (serialize_value_expression_chain it.predicate)
         (serialize_instructions it.body)
+  | Return e ->
+      sf "return %s" (serialize_value_expression_chain e)
 
 
 and serialize_instructions l =
@@ -107,19 +109,19 @@ let serialize_attribute (a : Scalpel_class.attribute) =
 
 
 let serialize_class (c : Scalpel_class.definition) =
-  sf "class %s %s" c.identifier
-    (List_ext.join_map "{\n" "\n}" ",\n" serialize_attribute c.attributes)
+  sf "class %s %s %s" c.identifier
+    (List_ext.join_map "(\n" "\n)" ",\n" serialize_attribute c.attributes)
+    (List_ext.join_map "{\n" "\n}" "\n" serialize_function c.methods)
 
 
 let serialize_program defs =
-  List_ext.join "" "" "\n\n"
-    (List.map
-       (fun def ->
-         match def with
-         | Scalpel_program.Type t ->
-             serialize_type t
-         | Scalpel_program.Function f ->
-             serialize_function f
-         | Scalpel_program.Class c ->
-             serialize_class c )
-       defs )
+  List_ext.join_map "" "" "\n\n"
+    (fun def ->
+      match def with
+      | Scalpel_program.Type t ->
+          serialize_type t
+      | Scalpel_program.Function f ->
+          serialize_function f
+      | Scalpel_program.Class c ->
+          serialize_class c )
+    defs

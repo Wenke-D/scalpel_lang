@@ -8,5 +8,6 @@ type definition =
       ; true_branch: definitions
       ; false_branch: definitions }
   | Loop of {predicate: expression_chain; body: definitions}
+  | Return of expression_chain
 
 and definitions = definition list

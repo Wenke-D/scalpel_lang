@@ -17,6 +17,7 @@
 %token TRUE_BRANCH_PRELUDE
 %token FALSE_BRANCH_PRELUDE
 %token LOOP_PRELUDE
+%token RETURN_PRELUDE
 
 
 // operators
@@ -249,19 +250,25 @@ instruction:
             body;
         }
     }
+
+|   RETURN_PRELUDE
+    expr = value_expression_chain
+    {
+        Scalpel_instruction.Return expr
+    }
 ;
 
 
 class_definition:
-    CLASS_PRELUDE id=IDENTIFIER
-    INSTRUCTIONS_OPENOR
-        attributes = separated_list(COMMA, attribute)
-    INSTRUCTIONS_CLOSER
+    CLASS_PRELUDE
+    id=IDENTIFIER
+    attributes = attributes
+    methods = methods
     {
         Scalpel_class.{
             identifier = id;
             attributes;
-            methods = []
+            methods = methods
         }
     }
 ;
@@ -278,3 +285,18 @@ attribute:
         }
     }
 
+attributes:
+    VALUE_ARGUMENT_OPENOR
+        list = separated_list(COMMA, attribute)
+    VALUE_ARGUMENT_CLOSER
+    {
+        list
+    }
+;
+
+
+methods:
+    INSTRUCTIONS_OPENOR
+        list = list(function_definition)
+    INSTRUCTIONS_CLOSER
+    {list}
