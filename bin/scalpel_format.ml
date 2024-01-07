@@ -102,6 +102,15 @@ let serialize_function (def : Scalpel_function.definition) =
     (serialize_instructions def.instructions)
 
 
+let serialize_attribute (a : Scalpel_class.attribute) =
+  sf "%s %s %s" (serialize_mutability a.mutability) a.typename a.identifier
+
+
+let serialize_class (c : Scalpel_class.definition) =
+  sf "class %s %s" c.identifier
+    (List_ext.join_map "{\n" "\n}" ",\n" serialize_attribute c.attributes)
+
+
 let serialize_program defs =
   List_ext.join "" "" "\n\n"
     (List.map
@@ -110,5 +119,7 @@ let serialize_program defs =
          | Scalpel_program.Type t ->
              serialize_type t
          | Scalpel_program.Function f ->
-             serialize_function f )
+             serialize_function f
+         | Scalpel_program.Class c ->
+             serialize_class c )
        defs )

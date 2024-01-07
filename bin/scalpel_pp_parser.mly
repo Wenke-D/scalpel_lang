@@ -7,6 +7,7 @@
 
 // top-level declarations
 %token TYPE_PRELUDE
+%token CLASS_PRELUDE
 %token MUTABLE_PRELUDE
 %token FROZEN_PRELUDE
 %token STATIC_PRELUDE
@@ -61,6 +62,7 @@ program:
 definition:
 | t = type_definition { Type t }
 | f = function_definition { Function f }
+| c = class_definition { Class c }
 ;
 
 
@@ -248,4 +250,31 @@ instruction:
         }
     }
 ;
+
+
+class_definition:
+    CLASS_PRELUDE id=IDENTIFIER
+    INSTRUCTIONS_OPENOR
+        attributes = separated_list(COMMA, attribute)
+    INSTRUCTIONS_CLOSER
+    {
+        Scalpel_class.{
+            identifier = id;
+            attributes;
+            methods = []
+        }
+    }
+;
+
+attribute:
+    mut = mutability
+    typename=IDENTIFIER
+    id=IDENTIFIER
+    {
+        Scalpel_class.{
+            mutability = mut;
+            typename;
+            identifier = id
+        }
+    }
 

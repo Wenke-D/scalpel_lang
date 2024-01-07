@@ -31,3 +31,7 @@ let accumulate l to_int = List.fold_left (fun sum e -> sum + to_int e) 0 l
 
 let join prefix suffix delimiter list =
   prefix ^ String.concat delimiter list ^ suffix
+
+
+let join_map prefix suffix delimiter mapper list =
+  join prefix suffix delimiter (List.map mapper list)

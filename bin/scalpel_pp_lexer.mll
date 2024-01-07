@@ -8,6 +8,7 @@
     List.iter (fun (s, k) -> Hashtbl.add h s k)
       [ 
         "type",  TYPE_PRELUDE;
+        "class", CLASS_PRELUDE;
         "mutable",  MUTABLE_PRELUDE;
         "frozen", FROZEN_PRELUDE;
         "static", STATIC_PRELUDE;
