@@ -100,7 +100,7 @@ let serialize_body (b : Scalpel_function.body) =
   | Instructions l ->
       serialize_instructions l
   | Native ->
-      "{native}"
+      "{#native implementation}"
 
 
 let serialize_function (def : Scalpel_function.definition) =
@@ -117,8 +117,11 @@ let serialize_attribute (a : Scalpel_class.attribute) =
 
 
 let serialize_class (c : Scalpel_class.definition) =
-  sf "class %s %s %s" c.identifier
-    (List_ext.join_map "(\n" "\n)" ",\n" serialize_attribute c.attributes)
+  let attributes_text =
+    if List.length c.attributes = 0 then "()"
+    else List_ext.join_map "(\n" "\n)" ",\n" serialize_attribute c.attributes
+  in
+  sf "class %s %s %s" c.identifier attributes_text
     (List_ext.join_map "{\n" "\n}" "\n" serialize_function c.methods)
 
 
