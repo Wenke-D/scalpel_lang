@@ -4,9 +4,9 @@ type typing = Ast.Scalpel_modifier.typing
 
 type variable_definition = Ast.Scalpel_value.variable
 
-type function_definition = Ast.Scalpel_function.definition
+type function_definition = Ast.Function.t
 
-type class_definition = Ast.Scalpel_class.definition
+type class_definition = Ast.Class.t
 
 type variable_table = variable_definition StringTable.t
 

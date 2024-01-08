@@ -131,7 +131,7 @@ function_definition:
     return_type = typing
     body = function_body
     {
-        Scalpel_function.{
+        Function.{
             mutability = m;
             identifier = id;
             parameters;
@@ -142,9 +142,9 @@ function_definition:
 ;
 
 function_body:
-| { Scalpel_function.Native }
+| { Function.Native }
 | instructions = instructions
-    { Scalpel_function.Instructions instructions }
+    { Function.Instructions instructions }
 ;
 
 
@@ -168,7 +168,7 @@ parameter:
     id=IDENTIFIER
     t = typing
     {
-       Scalpel_function.{identifier = id; typename = t}
+       Function.{identifier = id; typename = t}
     }
 ;
 
@@ -272,7 +272,7 @@ class_definition:
     attributes = attributes
     methods = methods
     {
-        Scalpel_class.{
+        Class.{
             identifier = id;
             attributes;
             methods = methods
@@ -285,7 +285,7 @@ attribute:
     typename=IDENTIFIER
     id=IDENTIFIER
     {
-        Scalpel_class.{
+        Class.{
             mutability = mut;
             typename;
             identifier = id

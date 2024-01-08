@@ -1,4 +1,4 @@
 (executable
  (name scalpel)
  (public_name scalpel)
- (libraries scalpel_lang.ast scalpel_lang.typecheck scalpel_lang.list_ext))
+ (libraries ast typecheck list_ext))

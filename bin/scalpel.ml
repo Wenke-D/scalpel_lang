@@ -27,6 +27,6 @@ let () =
       prerr_endline (Error_syntax.format_syntax_error p) ;
       exit 1
   in
-  print_endline (Serialize_scalpel.serialize_program p) ;
+  print_endline (Ast.Format.serialize_program p) ;
   let _ = Typecheck.Check_program.typecheck p in
   () ; close_in c ; exit 0

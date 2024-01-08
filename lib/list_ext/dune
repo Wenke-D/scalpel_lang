@@ -1,3 +1,2 @@
 (library
- (name list_ext)
- (public_name scalpel_lang.list_ext))
+ (name list_ext))

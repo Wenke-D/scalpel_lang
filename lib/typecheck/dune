@@ -1,4 +1,3 @@
 (library
  (name typecheck)
- (public_name scalpel_lang.typecheck)
- (libraries scalpel_lang.ast))
+ (libraries ast))

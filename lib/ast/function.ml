@@ -6,7 +6,7 @@ type parameters = parameter list
 
 type body = Instructions of Scalpel_instruction.definitions | Native
 
-type definition =
+type t =
   { mutability: mutability
   ; identifier: string
   ; parameters: parameters

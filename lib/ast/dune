@@ -1,7 +1,6 @@
 (library
  (name ast)
- (public_name scalpel_lang.ast)
- (libraries))
+ (libraries list_ext))
 
 (ocamllex
  (modules scalpel_pp_lexer))

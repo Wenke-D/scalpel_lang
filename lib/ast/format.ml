@@ -1,5 +1,3 @@
-open Ast
-
 let sf = Printf.sprintf
 
 let assign = "<-"
@@ -61,7 +59,7 @@ let serialize_variable (var : Scalpel_value.variable) =
     (serialize_typing var.typename)
 
 
-let serialize_parameter (p : Scalpel_function.parameter) =
+let serialize_parameter (p : Function.parameter) =
   sf "%s: %s" p.identifier (serialize_typing p.typename)
 
 
@@ -97,7 +95,7 @@ and serialize_instructions l =
   else List_ext.join_map "{\n" "\n}" "\n" serialize_instruction l
 
 
-let serialize_body (b : Scalpel_function.body) =
+let serialize_body (b : Function.body) =
   match b with
   | Instructions l ->
       serialize_instructions l
@@ -105,7 +103,7 @@ let serialize_body (b : Scalpel_function.body) =
       "{#native implementation}"
 
 
-let serialize_function (def : Scalpel_function.definition) =
+let serialize_function (def : Function.t) =
   sf "%s %s%s -> %s %s"
     (serialize_mutability def.mutability)
     def.identifier
@@ -114,11 +112,11 @@ let serialize_function (def : Scalpel_function.definition) =
     (serialize_body def.body)
 
 
-let serialize_attribute (a : Scalpel_class.attribute) =
+let serialize_attribute (a : Class.attribute) =
   sf "%s %s %s" (serialize_mutability a.mutability) a.typename a.identifier
 
 
-let serialize_class (c : Scalpel_class.definition) =
+let serialize_class (c : Class.t) =
   let attributes_text =
     if List.length c.attributes = 0 then ""
     else List_ext.join_map "(\n" "\n)" ",\n" serialize_attribute c.attributes

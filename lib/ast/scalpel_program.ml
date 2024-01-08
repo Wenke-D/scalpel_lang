@@ -1,5 +1,3 @@
-type component =
-  | Type of Scalpel_type.definition
-  | Class of Scalpel_class.definition
+type component = Type of Scalpel_type.definition | Class of Class.t
 
 type definition = component list
