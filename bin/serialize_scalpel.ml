@@ -1,8 +1,10 @@
+open Ast
+
 let sf = Printf.sprintf
 
 let assign = "<-"
 
-module List_ext = Scalpel_lang.List_ext
+module List_ext = List_ext
 
 let rec serialize_type_expression (e : Scalpel_type.expression) =
   match e with

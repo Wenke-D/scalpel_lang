@@ -1,0 +1,12 @@
+(library
+ (name ast)
+ (public_name scalpel_lang.ast)
+ (libraries))
+
+(ocamllex
+ (modules scalpel_pp_lexer))
+
+(menhir
+ (modules scalpel_pp_parser)
+ (flags --explain --dump)
+ (infer true))

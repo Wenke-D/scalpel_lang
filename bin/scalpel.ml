@@ -1,7 +1,7 @@
 let () = Printexc.record_backtrace true
 
-module Parser = Scalpel_pp_parser
-module Lexer = Scalpel_pp_lexer
+module Parser = Ast.Scalpel_pp_parser
+module Lexer = Ast.Scalpel_pp_lexer
 
 let _ = ".scpl"
 
@@ -28,5 +28,5 @@ let () =
       exit 1
   in
   print_endline (Serialize_scalpel.serialize_program p) ;
-  let _ = Typecheck_program.typecheck p in
+  let _ = Typecheck.Check_program.typecheck p in
   () ; close_in c ; exit 0
