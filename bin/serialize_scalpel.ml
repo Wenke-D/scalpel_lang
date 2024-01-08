@@ -121,8 +121,11 @@ let serialize_class (c : Scalpel_class.definition) =
     if List.length c.attributes = 0 then ""
     else List_ext.join_map "(\n" "\n)" ",\n" serialize_attribute c.attributes
   in
-  sf "class %s%s%s" c.identifier attributes_text
-    (List_ext.join_map "{\n" "\n}" "\n" serialize_function c.methods)
+  let methods_text =
+    if List.length c.methods = 0 then "{}"
+    else List_ext.join_map "{\n" "\n}" "\n" serialize_function c.methods
+  in
+  sf "class %s%s%s" c.identifier attributes_text methods_text
 
 
 let serialize_program defs =
@@ -131,8 +134,6 @@ let serialize_program defs =
       match def with
       | Scalpel_program.Type t ->
           serialize_type t
-      | Scalpel_program.Function f ->
-          serialize_function f
       | Scalpel_program.Class c ->
           serialize_class c )
     defs
