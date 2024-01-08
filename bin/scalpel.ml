@@ -28,5 +28,5 @@ let () =
       exit 1
   in
   print_endline (Serialize_scalpel.serialize_program p) ;
-  close_in c ;
-  exit 0
+  let _ = Typecheck_program.typecheck p in
+  () ; close_in c ; exit 0
