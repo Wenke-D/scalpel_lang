@@ -92,7 +92,15 @@ let rec serialize_instruction (i : Scalpel_instruction.definition) =
 
 and serialize_instructions l =
   if List.length l = 0 then "{}"
-  else List_ext.join "{\n" "\n}" "\n" (List.map serialize_instruction l)
+  else List_ext.join_map "{\n" "\n}" "\n" serialize_instruction l
+
+
+let serialize_body (b : Scalpel_function.body) =
+  match b with
+  | Instructions l ->
+      serialize_instructions l
+  | Native ->
+      "{native}"
 
 
 let serialize_function (def : Scalpel_function.definition) =
@@ -101,7 +109,7 @@ let serialize_function (def : Scalpel_function.definition) =
     def.identifier
     (List_ext.join "(" ")" ", " (List.map serialize_parameter def.parameters))
     (serialize_typing def.return_type)
-    (serialize_instructions def.instructions)
+    (serialize_body def.body)
 
 
 let serialize_attribute (a : Scalpel_class.attribute) =

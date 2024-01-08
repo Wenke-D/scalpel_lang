@@ -27,6 +27,6 @@ let () =
       prerr_endline (Error_syntax.format_syntax_error p) ;
       exit 1
   in
-  print_endline (Scalpel_format.serialize_program p) ;
+  print_endline (Serialize_scalpel.serialize_program p) ;
   close_in c ;
   exit 0

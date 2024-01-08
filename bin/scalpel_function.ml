@@ -4,9 +4,11 @@ type parameter = {identifier: string; typename: typing}
 
 type parameters = parameter list
 
+type body = Instructions of Scalpel_instruction.definitions | Native
+
 type definition =
   { mutability: mutability
   ; identifier: string
   ; parameters: parameters
-  ; instructions: Scalpel_instruction.definitions
+  ; body: body
   ; return_type: typing }

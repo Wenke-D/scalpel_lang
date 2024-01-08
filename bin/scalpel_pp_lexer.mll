@@ -16,6 +16,7 @@
         "else",  FALSE_BRANCH_PRELUDE;
         "while", LOOP_PRELUDE;
         "return", RETURN_PRELUDE;
+        (* "native", NATIVE_MARK; *)
       ] ;
     fun s ->
       try  Hashtbl.find h s

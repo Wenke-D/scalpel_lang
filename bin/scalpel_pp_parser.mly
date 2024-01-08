@@ -19,6 +19,8 @@
 %token LOOP_PRELUDE
 %token RETURN_PRELUDE
 
+// %token NATIVE_MARK
+
 
 // operators
 %token ASSIGN
@@ -128,17 +130,24 @@ function_definition:
     id=IDENTIFIER
     parameters=parameter_list
     return_type = typing
-    instructions = instructions
+    body = function_body
     {
         Scalpel_function.{
             mutability = m;
             identifier = id;
             parameters;
-            instructions;
+            body;
             return_type
         }
     }
 ;
+
+function_body:
+| { Scalpel_function.Native }
+| instructions = instructions
+    { Scalpel_function.Instructions instructions }
+;
+
 
 mutability:
 |   MUTABLE_PRELUDE {Mutable}

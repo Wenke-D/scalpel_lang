@@ -1,0 +1,8 @@
+class Integer() {
+
+    static f2()
+
+    frozen add(a:BB, b:AA): Void{
+    // a fronzen function
+    }
+}
