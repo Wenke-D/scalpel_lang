@@ -1,4 +1,5 @@
 
+class test{
 
 // without
 mutable f1(x, y){
@@ -6,4 +7,6 @@ mutable f1(x, y){
 
 // with
 frozen f2(a:BB, b:AA): Void{
+}
+
 }

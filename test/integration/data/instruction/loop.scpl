@@ -1,6 +1,7 @@
-
+class test{
 static loop(): Void{
     while "true" {
         y = "false"
     }
+}
 }

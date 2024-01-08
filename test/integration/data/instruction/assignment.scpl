@@ -1,6 +1,9 @@
+class test{
 
 mutable assignment(a: A, b: B): Char{
     x = Int32("2")
     y = x
     z = "123"
+}
+
 }

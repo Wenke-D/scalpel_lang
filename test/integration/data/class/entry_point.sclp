@@ -1,0 +1,22 @@
+class Integer{
+
+    frozen add(other:Integer): Integer
+    
+    frozen negate():Integer
+
+    frozen minus(other:Integer){
+        return this.add(this.negate())
+    }
+}
+
+
+class Pair(static Integer x, static Integer y){}
+
+
+class Program{
+    frozen main(){
+        mutable x = Integer("32")
+        x = x.add(Integer("1"))
+        return Void()
+    }
+}

@@ -64,7 +64,6 @@ program:
 
 definition:
 | t = type_definition { Type t }
-| f = function_definition { Function f }
 | c = class_definition { Class c }
 ;
 

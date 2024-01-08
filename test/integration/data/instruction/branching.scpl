@@ -1,4 +1,4 @@
-
+class test{
 mutable if_else(): Void{
     if "123" {
         y = x
@@ -12,4 +12,5 @@ mutable if_no_else(): Void{
         y = x
     }
     x = y
+}
 }
