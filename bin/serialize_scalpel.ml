@@ -34,8 +34,8 @@ let rec serialize_value_expression (v : Scalpel_value.expression) =
       sf "\"%s\"" x
   | Variable x ->
       sf "%s" x
-  | Construction c ->
-      sf "%s%s" c.typename
+  | Call c ->
+      sf "%s%s" c.identifier
         (List_ext.join_map "(" ")" ", " serialize_value_expression_chain
            c.arguments )
 
@@ -118,10 +118,10 @@ let serialize_attribute (a : Scalpel_class.attribute) =
 
 let serialize_class (c : Scalpel_class.definition) =
   let attributes_text =
-    if List.length c.attributes = 0 then "()"
+    if List.length c.attributes = 0 then ""
     else List_ext.join_map "(\n" "\n)" ",\n" serialize_attribute c.attributes
   in
-  sf "class %s %s %s" c.identifier attributes_text
+  sf "class %s%s%s" c.identifier attributes_text
     (List_ext.join_map "{\n" "\n}" "\n" serialize_function c.methods)
 
 

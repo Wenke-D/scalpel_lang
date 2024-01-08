@@ -3,12 +3,10 @@ open Scalpel_modifier
 type variable =
   {mutability: mutability; identifier: string; typename: Scalpel_modifier.typing}
 
-type construction = {onHeap: bool; typename: string; arguments: expression_list}
-
 and expression =
   | Variable of string
   | Literal of string
-  | Construction of construction
+  | Call of {identifier: string; arguments: expression_list}
 
 and expression_chain = expression list
 

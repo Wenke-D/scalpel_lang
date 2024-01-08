@@ -174,9 +174,9 @@ parameter:
 ;
 
 value_expression:
-| id = IDENTIFIER {Variable id}
-| value = LITERAL_VALUE {Literal value}
-| c = construction {Scalpel_value.Construction c}
+| id = IDENTIFIER {Scalpel_value.Variable id}
+| value = LITERAL_VALUE {Scalpel_value.Literal value}
+| c = call { c }
 ;
 
 value_expression_chain:
@@ -192,13 +192,12 @@ value_expression_list:
     VALUE_ARGUMENT_CLOSER
     { list }
 
-construction:
-    typename=IDENTIFIER
+call:
+    id=IDENTIFIER
     arguments=value_expression_list
     {
-        {
-            onHeap = false; 
-            typename = typename; 
+        Scalpel_value.Call{
+            identifier = id; 
             arguments
         }
     }
@@ -295,8 +294,9 @@ attribute:
     }
 
 attributes:
-    VALUE_ARGUMENT_OPENOR
-        list = separated_list(COMMA, attribute)
+|   { [] }
+|   VALUE_ARGUMENT_OPENOR
+        list = separated_nonempty_list(COMMA, attribute)
     VALUE_ARGUMENT_CLOSER
     {
         list
