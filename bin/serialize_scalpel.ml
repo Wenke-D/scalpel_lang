@@ -36,8 +36,8 @@ let rec serialize_value_expression (v : Scalpel_value.expression) =
       sf "%s" x
   | Construction c ->
       sf "%s%s" c.typename
-        (List_ext.join "(" ")" ", "
-           (List.map serialize_value_expression c.arguments) )
+        (List_ext.join_map "(" ")" ", " serialize_value_expression_chain
+           c.arguments )
 
 
 and serialize_value_expression_chain chain =

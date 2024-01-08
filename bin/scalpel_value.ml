@@ -12,4 +12,4 @@ and expression =
 
 and expression_chain = expression list
 
-and expression_list = expression list
+and expression_list = expression_chain list

@@ -188,7 +188,7 @@ value_expression_chain:
 
 value_expression_list:
     VALUE_ARGUMENT_OPENOR
-    list = separated_list(COMMA, value_expression)
+    list = separated_list(COMMA, value_expression_chain)
     VALUE_ARGUMENT_CLOSER
     { list }
 
