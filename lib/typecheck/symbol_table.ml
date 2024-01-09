@@ -1,8 +1,8 @@
 module StringTable = Hashtbl.Make (String)
 
-type typing = Ast.Scalpel_modifier.typing
+type typing = Ast.Typing.t
 
-type variable_definition = Ast.Scalpel_value.variable
+type variable_definition = Ast.Value.variable
 
 type function_definition = Ast.Function.t
 

@@ -4,7 +4,7 @@ let assign = "<-"
 
 module List_ext = List_ext
 
-let rec serialize_type_expression (e : Scalpel_type.expression) =
+let rec serialize_type_expression (e : Type.expression) =
   match e with
   | Identifier id ->
       sf "<type %s>" id
@@ -19,16 +19,16 @@ and serialize_type_expressions l =
   List_ext.join "[" "]" ", " (List.map serialize_type_expression l)
 
 
-let serialize_type (t : Scalpel_type.definition) =
+let serialize_type (t : Type.t) =
   sf "type %s %s %s" t.identifier assign
     (serialize_type_expression t.expression)
 
 
-let serialize_mutability (m : Scalpel_modifier.mutability) =
+let serialize_mutability (m : Mutability.t) =
   match m with Mutable -> "mutable" | Frozen -> "frozen" | Static -> "static"
 
 
-let rec serialize_value_expression (v : Scalpel_value.expression) =
+let rec serialize_value_expression (v : Value.expression) =
   match v with
   | Literal x ->
       sf "\"%s\"" x
@@ -48,11 +48,11 @@ and serialize_value_expression_list list =
   List_ext.join "(" ")" ", " (List.map serialize_value_expression list)
 
 
-let serialize_typing (t : Scalpel_modifier.typing) =
+let serialize_typing (t : Typing.t) =
   match t with Inference -> "?" | Identifier id -> id
 
 
-let serialize_variable (var : Scalpel_value.variable) =
+let serialize_variable (var : Value.variable) =
   sf "%s %s :%s"
     (serialize_mutability var.mutability)
     var.identifier
@@ -65,7 +65,7 @@ let serialize_parameter (p : Function.parameter) =
 
 let identation = "    "
 
-let rec serialize_instruction (i : Scalpel_instruction.definition) =
+let rec serialize_instruction (i : Instruction.t) =
   match i with
   | Initialization (s, v) ->
       sf "%s%s %s %s" identation (serialize_variable s) assign
@@ -132,8 +132,8 @@ let serialize_program defs =
   List_ext.join_map "" "" "\n\n"
     (fun def ->
       match def with
-      | Scalpel_program.Type t ->
+      | Program.Type t ->
           serialize_type t
-      | Scalpel_program.Class c ->
+      | Program.Class c ->
           serialize_class c )
     defs

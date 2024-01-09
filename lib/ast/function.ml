@@ -1,14 +1,12 @@
-open Scalpel_modifier
-
-type parameter = {identifier: string; typename: typing}
+type parameter = {identifier: string; typename: Typing.t}
 
 type parameters = parameter list
 
-type body = Instructions of Scalpel_instruction.definitions | Native
+type body = Instructions of Instructions.t | Native
 
 type t =
-  { mutability: mutability
+  { mutability: Mutability.t
   ; identifier: string
   ; parameters: parameters
   ; body: body
-  ; return_type: typing }
+  ; return_type: Typing.t }

@@ -3,9 +3,9 @@
  (libraries list_ext))
 
 (ocamllex
- (modules scalpel_pp_lexer))
+ (modules lexer))
 
 (menhir
- (modules scalpel_pp_parser)
+ (modules parser)
  (flags --explain --dump)
  (infer true))

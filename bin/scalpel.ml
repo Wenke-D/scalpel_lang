@@ -1,7 +1,7 @@
 let () = Printexc.record_backtrace true
 
-module Parser = Ast.Scalpel_pp_parser
-module Lexer = Ast.Scalpel_pp_lexer
+module Parser = Ast.Parser
+module Lexer = Ast.Lexer
 
 let _ = ".scpl"
 
@@ -23,8 +23,8 @@ let () =
     try Parser.program Lexer.token lb
     with Parser.Error ->
       let pos = lb.lex_curr_p in
-      let (p : Error_syntax.position) = Error_syntax.make_position pos in
-      prerr_endline (Error_syntax.format_syntax_error p) ;
+      let (p : Error.Syntax.position) = Error.Syntax.make_position pos in
+      prerr_endline (Error.Syntax.format_syntax_error p) ;
       exit 1
   in
   print_endline (Ast.Format.serialize_program p) ;

@@ -1,9 +1,7 @@
-open Scalpel_modifier
-
 type variable =
-  {mutability: mutability; identifier: string; typename: Scalpel_modifier.typing}
+  {mutability: Mutability.t; identifier: string; typename: Typing.t}
 
-and expression =
+type expression =
   | Variable of string
   | Literal of string
   | Call of {identifier: string; arguments: expression_list}
