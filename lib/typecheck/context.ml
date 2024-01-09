@@ -14,7 +14,7 @@ type function_table = function_definition StringTable.t
 
 type class_table = class_definition StringTable.t
 
-type symbol_table =
+type t =
   {variables: variable_table; functions: function_table; classes: class_table}
 
 let init_table () =
