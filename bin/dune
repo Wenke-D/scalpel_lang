@@ -1,12 +1,4 @@
-(ocamllex
- (modules scalpel_pp_lexer))
-
-(menhir
- (modules scalpel_pp_parser)
- (flags --explain --dump)
- (infer true))
-
 (executable
- (public_name scalpel)
  (name scalpel)
- (libraries scalpel_lang))
+ (public_name scalpel)
+ (libraries ast typecheck list_ext error))

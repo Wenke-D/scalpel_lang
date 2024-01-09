@@ -1,8 +1,10 @@
 class Integer() {
 
-    static f2()
+    frozen add(other:Integer): Integer
+    
+    frozen negate():Integer
 
-    frozen add(a:BB, b:AA): Void{
-    // a fronzen function
+    frozen minus(other:Integer){
+        return this.add(this.negate())
     }
 }

@@ -1,3 +1,4 @@
+class x {
 
 mutable f1(x:Int32, y:String): Void{
     // a mutable function
@@ -10,3 +11,6 @@ frozen f2(a:BB, b:AA): Void{
 static f3(): Void{
     // a static function
 }
+
+}
+

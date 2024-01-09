@@ -1,4 +1,4 @@
-
+class test{
 // with typing
 mutable f1(x:Int32, y:String): Void{
     mutable x:Char = Int32("123")
@@ -13,4 +13,5 @@ mutable f2(x:Int32, y:String){
     mutable y = Cordinate("123", "xyz")
     frozen x1 = String("hello")
     static y1 = Float("48.0", f10)
+}
 }

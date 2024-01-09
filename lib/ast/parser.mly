@@ -1,5 +1,5 @@
 %{
-  open Scalpel_program
+  open Program
 %}
 
 %token <string> IDENTIFIER
@@ -48,9 +48,9 @@
 
 %start program
 
-%type <Scalpel_program.definition> program
-%type <Scalpel_type.expression> type_identifier
-%type <Scalpel_modifier.typing> typing
+%type <Program.t> program
+%type <Type.expression> type_identifier
+%type <Typing.t> typing
 
 %%
 
@@ -64,7 +64,6 @@ program:
 
 definition:
 | t = type_definition { Type t }
-| f = function_definition { Function f }
 | c = class_definition { Class c }
 ;
 
@@ -72,19 +71,19 @@ definition:
 type_definition:
 | TYPE_PRELUDE id=IDENTIFIER ASSIGN e=type_expression 
     {
-        Scalpel_type.{identifier=id; expression=e}
+        Type.{identifier=id; expression=e}
     }
 ;
 
 
 type_identifier:
-    id = IDENTIFIER {Scalpel_type.Identifier id}
+    id = IDENTIFIER {Type.Identifier id}
 ;
 
 
 type_symbol: 
     n = NON_NEGATIVE_INTEGER
-    { Scalpel_type.Symbol n }
+    { Type.Symbol n }
 ;
 
 
@@ -92,7 +91,7 @@ type_specialisation:
     id = IDENTIFIER
     args = type_expression_list
     {
-        Scalpel_type.Specialization(id, args)
+        Type.Specialization(id, args)
     }
 ;
 
@@ -112,9 +111,9 @@ type_expression_list:
 ;
 
 typing:
-|       { Scalpel_modifier.Inference }
+|       { Typing.Inference }
 |   TYPING_PRELUDE id=IDENTIFIER
-    { Scalpel_modifier.Identifier id }
+    { Typing.Identifier id }
 ;
 
 
@@ -132,7 +131,7 @@ function_definition:
     return_type = typing
     body = function_body
     {
-        Scalpel_function.{
+        Function.{
             mutability = m;
             identifier = id;
             parameters;
@@ -143,9 +142,9 @@ function_definition:
 ;
 
 function_body:
-| { Scalpel_function.Native }
+| { Function.Native }
 | instructions = instructions
-    { Scalpel_function.Instructions instructions }
+    { Function.Instructions instructions }
 ;
 
 
@@ -169,13 +168,13 @@ parameter:
     id=IDENTIFIER
     t = typing
     {
-       Scalpel_function.{identifier = id; typename = t}
+       Function.{identifier = id; typename = t}
     }
 ;
 
 value_expression:
-| id = IDENTIFIER {Scalpel_value.Variable id}
-| value = LITERAL_VALUE {Scalpel_value.Literal value}
+| id = IDENTIFIER {Value.Variable id}
+| value = LITERAL_VALUE {Value.Literal value}
 | c = call { c }
 ;
 
@@ -196,7 +195,7 @@ call:
     id=IDENTIFIER
     arguments=value_expression_list
     {
-        Scalpel_value.Call{
+        Value.Call{
             identifier = id; 
             arguments
         }
@@ -207,7 +206,7 @@ call:
 variable:
 |   m = mutability id = IDENTIFIER typename=typing
     {
-       Scalpel_value.{
+       Value.{
             mutability = m;
             identifier = id;
             typename
@@ -231,7 +230,7 @@ instruction:
     FALSE_BRANCH_PRELUDE
     false_branch = instructions
     {
-        Scalpel_instruction.Branching ({
+        Instruction.Branching ({
             predicate;
             true_branch;
             false_branch
@@ -242,7 +241,7 @@ instruction:
     predicate = value_expression_chain
     true_branch = instructions
     {
-        Scalpel_instruction.Branching {
+        Instruction.Branching {
             predicate;
             true_branch;
             false_branch = []
@@ -253,7 +252,7 @@ instruction:
     predicate = value_expression_chain
     body = instructions
     {
-        Scalpel_instruction.Loop {
+        Instruction.Loop {
             predicate;
             body;
         }
@@ -262,7 +261,7 @@ instruction:
 |   RETURN_PRELUDE
     expr = value_expression_chain
     {
-        Scalpel_instruction.Return expr
+        Instruction.Return expr
     }
 ;
 
@@ -273,7 +272,7 @@ class_definition:
     attributes = attributes
     methods = methods
     {
-        Scalpel_class.{
+        Class.{
             identifier = id;
             attributes;
             methods = methods
@@ -286,7 +285,7 @@ attribute:
     typename=IDENTIFIER
     id=IDENTIFIER
     {
-        Scalpel_class.{
+        Class.{
             mutability = mut;
             typename;
             identifier = id

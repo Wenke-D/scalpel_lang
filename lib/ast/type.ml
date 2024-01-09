@@ -6,4 +6,4 @@ type expression =
 
 and expressions = expression list
 
-type definition = {identifier: string; expression: expression}
+type t = {identifier: string; expression: expression}
