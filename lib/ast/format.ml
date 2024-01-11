@@ -128,7 +128,7 @@ let serialize_class (c : Class.t) =
   sf "class %s%s%s" c.identifier attributes_text methods_text
 
 
-let serialize_program defs =
+let program defs =
   List_ext.join_map "" "" "\n\n"
     (fun def ->
       match def with

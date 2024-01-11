@@ -33,3 +33,11 @@ let add_function sym_tb (f : function_definition) =
 
 let add_class sym_tb (c : class_definition) =
   StringTable.add sym_tb.classes c.identifier c
+
+
+let format sym_tb =
+  let vars = StringTable.to_seq_values sym_tb.variables in
+  let var_text = Seq.map Ast.Format.serialize_variable vars in
+  let classes = StringTable.to_seq_values sym_tb.classes in
+  let clz_text = Seq.map Ast.Format.serialize_class classes in
+  (var_text, clz_text)

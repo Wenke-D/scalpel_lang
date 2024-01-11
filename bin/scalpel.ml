@@ -27,6 +27,8 @@ let () =
       prerr_endline (Error.Syntax.format_syntax_error p) ;
       exit 1
   in
-  print_endline (Ast.Format.serialize_program p) ;
-  let _ = Typecheck.Check_program.typecheck p in
-  () ; close_in c ; exit 0
+  (* print_endline (Ast.Format.program p) ; *)
+  let success = Typecheck.Program.check p in
+  if success then () else print_endline "no main" ;
+  let raw_p = Raw_ast.Program.from p in
+  Codegen.Program.make raw_p ; close_in c ; exit 0

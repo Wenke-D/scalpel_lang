@@ -1,4 +1,4 @@
 (executable
  (name scalpel)
  (public_name scalpel)
- (libraries ast typecheck list_ext error))
+ (libraries ast typecheck list_ext error codegen))
