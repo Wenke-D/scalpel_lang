@@ -1,7 +1,7 @@
 module Attribute = struct
   type t = {typename: string; identifier: string}
 
-  let from (a : Ast.Class.attribute) =
+  let from (a : Ast.Class.Attribute.t) =
     {typename= a.typename; identifier= a.identifier}
 end
 

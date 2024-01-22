@@ -4,7 +4,7 @@ let assign = "<-"
 
 module List_ext = List_ext
 
-let rec serialize_type_expression (e : Type.expression) =
+let rec serialize_type_expression (e : Type.Expression.t) =
   match e with
   | Identifier id ->
       sf "<type %s>" id
@@ -28,7 +28,7 @@ let serialize_mutability (m : Mutability.t) =
   match m with Mutable -> "mutable" | Frozen -> "frozen" | Static -> "static"
 
 
-let rec serialize_value_expression (v : Value.expression) =
+let rec serialize_value_expression (v : Value.Expression.t) =
   match v with
   | Literal x ->
       sf "\"%s\"" x
@@ -52,7 +52,7 @@ let serialize_typing (t : Typing.t) =
   match t with Inference -> "?" | Identifier id -> id
 
 
-let serialize_variable (var : Value.variable) =
+let serialize_variable (var : Value.Variable.t) =
   sf "%s %s :%s"
     (serialize_mutability var.mutability)
     var.identifier
@@ -112,7 +112,7 @@ let serialize_function (def : Function.t) =
     (serialize_body def.body)
 
 
-let serialize_attribute (a : Class.attribute) =
+let serialize_attribute (a : Class.Attribute.t) =
   sf "%s %s %s" (serialize_mutability a.mutability) a.typename a.identifier
 
 

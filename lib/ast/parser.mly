@@ -49,7 +49,7 @@
 %start program
 
 %type <Program.t> program
-%type <Type.expression> type_identifier
+%type <Type.Expression.t> type_identifier
 %type <Typing.t> typing
 
 %%
@@ -77,13 +77,13 @@ type_definition:
 
 
 type_identifier:
-    id = IDENTIFIER {Type.Identifier id}
+    id = IDENTIFIER {Type.Expression.Identifier id}
 ;
 
 
 type_symbol: 
     n = NON_NEGATIVE_INTEGER
-    { Type.Symbol n }
+    { Type.Expression.Symbol n }
 ;
 
 
@@ -91,7 +91,7 @@ type_specialisation:
     id = IDENTIFIER
     args = type_expression_list
     {
-        Type.Specialization(id, args)
+        Type.Expression.Specialization(id, args)
     }
 ;
 
@@ -173,8 +173,8 @@ parameter:
 ;
 
 value_expression:
-| id = IDENTIFIER {Value.Variable id}
-| value = LITERAL_VALUE {Value.Literal value}
+| id = IDENTIFIER {Value.Expression.Variable id}
+| value = LITERAL_VALUE {Value.Expression.Literal value}
 | c = call { c }
 ;
 
@@ -195,7 +195,7 @@ call:
     id=IDENTIFIER
     arguments=value_expression_list
     {
-        Value.Call{
+        Value.Expression.Call{
             identifier = id; 
             arguments
         }
@@ -206,7 +206,7 @@ call:
 variable:
 |   m = mutability id = IDENTIFIER typename=typing
     {
-       Value.{
+       Value.Variable.{
             mutability = m;
             identifier = id;
             typename
@@ -285,7 +285,7 @@ attribute:
     typename=IDENTIFIER
     id=IDENTIFIER
     {
-        Class.{
+        Class.Attribute.{
             mutability = mut;
             typename;
             identifier = id

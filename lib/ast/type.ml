@@ -1,9 +1,12 @@
 (* type *)
-type expression =
-  | Identifier of string
-  | Symbol of int
-  | Specialization of (string * expressions)
 
-and expressions = expression list
+module Expression = struct
+  type t =
+    | Identifier of string
+    | Symbol of int
+    | Specialization of (string * list_t)
 
-type t = {identifier: string; expression: expression}
+  and list_t = t list
+end
+
+type t = {identifier: string; expression: Expression.t}

@@ -2,7 +2,7 @@ module StringTable = Hashtbl.Make (String)
 
 type typing = Ast.Typing.t
 
-type variable_definition = Ast.Value.variable
+type variable_definition = Ast.Value.Variable.t
 
 type function_definition = Ast.Function.t
 

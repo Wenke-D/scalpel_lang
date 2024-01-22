@@ -5,7 +5,7 @@ type t =
 
 and arguments = t array
 
-let from (src : Ast.Value.expression) =
+let from (src : Ast.Value.Expression.t) =
   match src with
   | Variable id ->
       Variable id

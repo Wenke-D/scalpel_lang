@@ -1,11 +1,14 @@
-type variable =
-  {mutability: Mutability.t; identifier: string; typename: Typing.t}
+module Variable = struct
+  type t = {mutability: Mutability.t; identifier: string; typename: Typing.t}
+end
 
-type expression =
-  | Variable of string
-  | Literal of string
-  | Call of {identifier: string; arguments: expression_list}
+module Expression = struct
+  type t =
+    | Variable of string
+    | Literal of string
+    | Call of {identifier: string; arguments: list_t}
 
-and expression_chain = expression list
+  and chain_t = t List.t
 
-and expression_list = expression_chain list
+  and list_t = chain_t List.t
+end
