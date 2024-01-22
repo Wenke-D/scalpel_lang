@@ -1,1 +1,2 @@
-let todo name = failwith (Printf.sprintf "[%s] not implemented !" name)
+let todo message =
+  Printf.ksprintf (fun str -> failwith (str ^ "not implemented !")) message

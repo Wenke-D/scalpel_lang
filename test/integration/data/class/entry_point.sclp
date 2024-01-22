@@ -14,12 +14,12 @@ class Int32{
 }
 
 
-class Pair(static Integer x, static Integer y){}
+class Pair(static Int32 x, static Int32 y){}
 
 
-class Program{
+class Program(static Int32 x, static Int32 y){
     frozen main(){
-        mutable x = y
+        mutable x1 = y
         return c
     }
 }

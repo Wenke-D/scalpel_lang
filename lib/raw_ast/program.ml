@@ -1,4 +1,4 @@
-type t = {functions: Function.t list}
+type t = {functions: Function.t list; classes: Class.t list}
 
 let from (p : Ast.Program.t) =
   let classes =
@@ -15,4 +15,5 @@ let from (p : Ast.Program.t) =
     List.flatten (List.map (fun (c : Ast.Class.t) -> c.methods) classes)
   in
   let raw_functions = List.map Function.from higher_functions in
-  {functions= raw_functions}
+  let raw_classes = List.map Class.from classes in
+  {functions= raw_functions; classes= raw_classes}

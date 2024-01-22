@@ -19,7 +19,7 @@ let from (instr : Ast.Instruction.t) =
   | Initialization (var, expr_chain) ->
       let expr = unfold_chain expr_chain in
       let expr' = Expression.from expr in
-      let var' : Variable.t = {identifier= var.identifier; typename= "int32"} in
+      let var' : Variable.t = {identifier= var.identifier; typename= "Pair"} in
       Initialization (var', expr')
   | Return expr ->
       let expr' = unfold_chain expr in
